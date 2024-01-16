@@ -27,3 +27,8 @@
 
 # pip install Flask-RESTful
 # pip install SQLAlchemy-serializer
+
+# pip install django - джанго
+# django-admin startproject my_proj - создаем проект
+# python manage.py startapp posts
+# python manage.py runserver
