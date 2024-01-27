@@ -1,13 +1,13 @@
 from django.shortcuts import render
 from django.http import HttpResponse
-
+from .forms import PostForm
 
 def index(request):
     return HttpResponse('Главная')
 
 
 def posts_list(request):
-    context = {'current_id': 5}
+    context = {'current_id': 5, 'form': PostForm}
     return render(request, 'posts/posts_list.html', context)
 
 

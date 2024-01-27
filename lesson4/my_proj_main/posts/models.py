@@ -69,7 +69,7 @@ class Comments(models.Model):
 
 # Модель отзывов
 class Review(models.Model):
-    title = models.CharField(max_length=100)
+    title = models.CharField(max_length=100, help_text="Заголовок")
     rating = models.IntegerField(choices=RATING)
     post = models.ForeignKey(
         Post,
@@ -81,4 +81,9 @@ class Review(models.Model):
     create_at = models.DateTimeField(auto_now_add=True)
     update_at = models.DateTimeField(auto_now=True)
     # Зависимость Один-к-одному
-    comments = models.OneToOneField(Comments, on_delete=models.SET_NULL)
+    comments = models.OneToOneField(
+        Comments,
+        on_delete=models.SET_NULL,
+        null=True,
+        related_name='review'
+    )

@@ -8,5 +8,13 @@
 <body>
     <h1>Список публикаций</h1>
     <a href="{% url 'posts:posts_detail' current_id %}">Отдельная публикация</a>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {{ form.as_div }}
+
+        <input type="submit">
+    </form>
 </body>
 </html>

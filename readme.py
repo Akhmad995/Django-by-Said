@@ -32,3 +32,7 @@
 # django-admin startproject my_proj - создаем проект
 # python manage.py startapp posts
 # python manage.py runserver
+# python manage.py createsuperuser
+
+# python manage.py migrate
+# python manage.py makemigrations
