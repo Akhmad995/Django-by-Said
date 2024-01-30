@@ -3,10 +3,16 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Публикация</title>
 </head>
 <body>
-    <h1>Отдельная публикация {{ id }}</h1>
-    <a href="{% url 'posts:posts_list' %}">Список публикаций</a>
+    <h1>{{ post.title }}</h1>
+    <p><b>{{ post.author }}</b></p>
+        
+    <div>
+        {{ post.text }}
+    </div>
+
+    <p><b>{{ post.pub_date }}</b></p>
 </body>
 </html>
