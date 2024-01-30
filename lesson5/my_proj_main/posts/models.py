@@ -34,9 +34,14 @@ class Post(models.Model):
         max_length=100,
         unique=True,
         blank=False,
-        null=False
+        null=False,
+        help_text="Заголовок",
+        verbose_name="Заголовок публикации"
     )
-    text = models.TextField(blank=False)
+    text = models.TextField(
+        blank=False,
+        verbose_name="Текст публикации"
+    )
     pub_date = models.DateTimeField(auto_now_add=True)
     # Внешний ключ для реализации отношения один-ко-многим.
     # Аргумент related_name задает имя, по которому можно получить
@@ -44,16 +49,28 @@ class Post(models.Model):
     author = models.ForeignKey(
         User,
         on_delete=models.CASCADE,
-        related_name='posts'
+        related_name='posts',
+        verbose_name="Автор публикации"
     )
     
-    tags = models.ManyToManyField(Tag, related_name='posts', through='PostTag')
+    tags = models.ManyToManyField(
+        Tag,
+        related_name='posts',
+        through='PostTag',
+        verbose_name="Теги публикации"
+    )
 
     # Класс Meta задает доп. установки данной модели.
     class Meta:
         # ordering - переопределяет поле сортировки записей в модели.
         # Знак "-" перед именем поля изменяет сортировку на убывающую.
         ordering = ['-pub_date']
+        verbose_name="Публикация"
+        verbose_name_plural="Публикации"
+
+    def __str__(self):
+        return f'{self.title[:30]} -- {self.pub_date}'
+
 
 
 # Промежуточная модель для связи Многие-ко-многим

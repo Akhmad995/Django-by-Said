@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Добавить пост</title>
 </head>
 <body>
     <h1>Список публикаций</h1>
@@ -12,7 +12,11 @@
     <form method="post">
         {% csrf_token %}
         
-        {{ form.as_div }}
+        {% for field in form.visible_fields %}
+            <div>
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
 
         <input type="submit">
     </form>
