@@ -36,14 +36,29 @@ def posts_list(request):
     # posts = Post.objects.filter(author=user)
     
     # contains - содержит подстроку
-    # posts = Post.objects.filter(text_contains='обнов')
+    # posts = Post.objects.filter(text__contains='обнов')
     # startwith, endwith - поле начинается*заканчивается
     
     # in - вхождение в набор значений 
-    # posts = Post.objects.filter(title_in=('Заг1', 'Заг2'))
+    # posts = Post.objects.filter(title__in=('Заг1', 'Заг2'))
 
     # range - вхождение в диапозон/интервал
-    # posts = Post.objects.filter(id_range=(1, 5))
+    # posts = Post.objects.filter(id__range=(1, 5))
+
+    # gt, gte, lt, lte - сравнение значения поля >, >=, <, <=
+    # posts = Post.objects.filter(id__gte=4)
+
+    # year, month, day, week, week_day, time, hour, minute, second
+    # Проверка поля по совпападению по отдельному из значений
+    # posts = Post.objects.filter(pub_date__hour=17)
+
+    # Комбинирование
+    # posts = Post.objects.filter(pub_date__hour__gte=16)
+    # posts = Post.objects.filter(pub_date__hour=16).filter(text__endwith='обновл')
+
+    # По полям связанных объектов
+    # posts = Post.objects.filter(author__username='Admin')
+    # print( Post.objects.filter(author__username='Admin').query )
 
     context = {'current_id': 5, 'form': PostForm, 'posts': posts}
     return render(request, 'posts/posts_list.html', context)
