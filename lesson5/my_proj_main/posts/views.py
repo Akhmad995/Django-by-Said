@@ -69,6 +69,17 @@ def posts_list(request):
     
     # count = Post.objects.count()
 
+    # Агрегирующие функции
+    # posts = Post.objects.aggregate( Max('id) )
+    # posts = Post.objects.aggregate( Avg('id) )
+                               
+    # Получаем среднее число айдишников всех постов пользователям
+    # annotate - расширение записей доп. полями как результат вычислений
+    # users =  User.objects.annotate( posts_avg=Avg('posts__id') )
+    # for elem in users:
+    #    print(elem.posts_avg)
+
+
     context = {'current_id': 5, 'form': PostForm, 'posts': posts}
     return render(request, 'posts/posts_list.html', context)
 
