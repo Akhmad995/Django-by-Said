@@ -60,6 +60,15 @@ def posts_list(request):
     # posts = Post.objects.filter(author__username='Admin')
     # print( Post.objects.filter(author__username='Admin').query )
 
+    # Сортировка объектов
+    # posts = Post.objects.filter(author__username='Admin').order_by('-pub_date')
+    # posts = Post.objects.filter(author__username='Admin').order_by('-pub_date')[:3] # Срез возвращает набор данных - первые 3
+    
+    # исключение отдельных полей
+    # posts = Post.objects.defer('text).all()
+    
+    # count = Post.objects.count()
+
     context = {'current_id': 5, 'form': PostForm, 'posts': posts}
     return render(request, 'posts/posts_list.html', context)
 
