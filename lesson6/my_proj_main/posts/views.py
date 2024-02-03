@@ -71,6 +71,9 @@ def posts_list(request):
 
     # Агрегирующие функции
     # posts = Post.objects.aggregate( Max('id) )
+    # posts = Post.objects.aggregate( Min('id) )
+    # posts = Post.objects.aggregate( Sum('id) )
+    # posts = Post.objects.aggregate( Count('id) )
     # posts = Post.objects.aggregate( Avg('id) )
                                
     # Получаем среднее число айдишников всех постов пользователям
