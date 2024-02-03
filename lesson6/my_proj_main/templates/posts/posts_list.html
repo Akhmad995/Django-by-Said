@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Добавить пост</title>
+</head>
+<body>
+    <h1>Список публикаций</h1>
+    <a href="{% url 'posts:posts_detail' current_id %}">Отдельная публикация</a>
+
+    <form method="post">
+        {% csrf_token %}
+        
+        {% for field in form.visible_fields %}
+            <div>
+                {{ field.label_tag }} {{ field }}
+            </div>
+        {% endfor %}
+
+        <input type="submit">
+    </form>
+
+    <br> <br>
+
+    {% for post in posts %}
+        <div class="post_cont">
+            <h2>{{ post.title }}</h2>
+            <div>
+                {{ post.text }}
+            </div>
+            <p><b>{{ post.pub_date }}</b></p>
+        </div>
+
+        <hr>
+    {% endfor %}
+</body>
+</html>
