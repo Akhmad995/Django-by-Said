@@ -1,5 +1,6 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.core.paginator import Paginator
 from .models import Post
 
 def index(request):
@@ -9,7 +10,18 @@ def index(request):
 def posts_list(request):    
     posts = Post.objects.all()
 
-    context = {'posts': posts}
+    paginator = Paginator(posts, 2)
+    # print(paginator.count) # Количество записей
+    # print(paginator.num_pages) # Количество страниц
+    # page1 = paginator.page(1)
+    # print(page1)
+    # print(page1.object_list)
+    
+    page_num = request.GET.get('page')
+    page_obj = paginator.get_page(page_num)
+
+    context = {'page_obj': page_obj}
+
     return render(request, 'posts/posts_list.html', context)
 
 
