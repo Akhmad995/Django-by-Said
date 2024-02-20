@@ -1,9 +1,9 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 
+
 class CustomUser(AbstractUser):
     '''Кастомная модель пользователя.'''
-
     birth_year = models.DateField(
         verbose_name='Год рождения',
         blank=False,
