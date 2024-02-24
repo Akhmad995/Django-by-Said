@@ -34,6 +34,8 @@
 # python manage.py runserver
 # python manage.py createsuperuser
 
+# python manage.py shell
+
 # python manage.py makemigrations
 # python manage.py migrate
 
