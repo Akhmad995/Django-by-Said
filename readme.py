@@ -37,6 +37,7 @@
 # python manage.py shell
 
 # python manage.py makemigrations
+# python manage.py makemigrations posts
 # python manage.py migrate
 
 # pip install djangorestframework - Rest API

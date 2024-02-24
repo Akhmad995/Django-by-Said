@@ -12,7 +12,6 @@ class Category(models.Model):
 class Post(models.Model):
     title = models.CharField(max_length=150)
     text = models.TextField()
-    pub_date = models.DateTimeField(default=timezone.now)
     author = models.ForeignKey(
             User, 
             on_delete=models.SET_NULL,
@@ -25,3 +24,4 @@ class Post(models.Model):
             related_name='posts',
             null=True
         )
+    pub_date = models.DateTimeField(default=timezone.now)

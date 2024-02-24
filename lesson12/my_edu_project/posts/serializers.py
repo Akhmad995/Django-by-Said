@@ -11,7 +11,7 @@ class PostSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Post
-        fields = ('post_title', 'text', 'pub_date', 'author', 'category')
+        fields = ('title', 'text', 'pub_date', 'author', 'category')
 
 class CategorySerializer(serializers.ModelSerializer):
     # Вместо id возвращаем стровоке представлеие объектов Post
