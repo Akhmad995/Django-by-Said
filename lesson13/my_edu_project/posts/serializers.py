@@ -1,6 +1,6 @@
 from django.utils import timezone
 from rest_framework import serializers
-from .models import Post, Category
+from .models import Post
 
 
 class BigName(serializers.Field):
@@ -34,16 +34,7 @@ class PostSerializer(serializers.ModelSerializer):
     class Meta:
         model = Post
         fields = (
-            'title', 'text', 'pub_date', 'create_date', 'author', 'category')
+            'title', 'text', 'pub_date', 'create_date', 'author'
+        )
 
 
-class CategorySerializer(serializers.ModelSerializer):    
-    posts = PostSerializer(read_only=True, many=True)
-    count = serializers.SerializerMethodField()
-
-    class Meta:
-        model = Category
-        fields = ('title', 'posts', 'count')
-
-    def get_count(self, obj):
-        return obj.posts.count()

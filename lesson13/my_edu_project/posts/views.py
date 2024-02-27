@@ -1,6 +1,6 @@
 from rest_framework import generics
-from .models import Post, Category
-from .serializers import PostSerializer, CategorySerializer
+from .models import Post
+from .serializers import PostSerializer
 
 
 # Представление для списка ресурсов публикаций
@@ -15,7 +15,3 @@ class PostDetail(generics.RetrieveUpdateDestroyAPIView):
     serializer_class = PostSerializer
 
 
-# Представление для отдельного ресурса категорий
-class CategoryDetail(generics.RetrieveUpdateDestroyAPIView):
-    queryset = Category.objects.all()
-    serializer_class = CategorySerializer
