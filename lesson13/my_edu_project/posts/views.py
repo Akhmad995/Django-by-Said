@@ -40,5 +40,26 @@ def post_list(request):
         return Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
+@api_view(['GET', 'PUT', 'PATCH', 'DELETE'])
 def post_detail(request, pk):
-    pass
+    """
+    Получаем, изменяем или удаляем отдельную публикацию.
+    """
+
+    post = get_object_or_404(Post, pk=pk)
+
+    if request.method == 'GET':
+        serializer = PostSerializer(post)
+        return Response(serializer.data, status=status.HTTP_200_OK)
+        
+    elif request.method == 'PUT' or request.method == 'PATCH':
+        # аргумент partial позволяет передавать не все аргументы
+        serializer = PostSerializer(post, data=request.data, partial=True)
+        if serializer.is_valid:
+            serializer.save()
+            return Response(serializer.data, status=status.HTTP_200_OK)
+        return Response(serializer.error, status=status.HTTP_400_BAD_REQUEST)
+
+    elif request.method == 'DELETE':
+        post.delete()
+        return Response(status=status.HTTP_204_NO_CONTENT)
