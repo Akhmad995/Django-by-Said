@@ -128,8 +128,15 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 AUTH_USER_MODEL = 'users.CustomUser'
 
 REST_FRAMEWORK = {
+    'DEFAULT_PERMISSON_CLASSES': [
+        # 'rest_framework.permissions.AllowAny',
+        # 'rest_framework.permissions.IsAuthenticated',
+        # 'rest_framework.permissions.IsAuthenticatedOrReadOnly',
+        # 'rest_framework.permissions.IsAdminUser',
+        'posts.permissons.IsAdminOrReadOnly',
+    ],
     # Установка пагинации на уровне проекта
     # 'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.PageNumberPagination',
     #'PAGE_SIZE' : 3,
-    'DEFAULT_PAGINATION_CLASS' : 'posts.pagination.PostPagination',
+    #'DEFAULT_PAGINATION_CLASS' : 'posts.pagination.PostPagination',
 }
