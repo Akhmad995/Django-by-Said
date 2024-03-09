@@ -39,5 +39,9 @@
 # python manage.py makemigrations
 # python manage.py makemigrations posts
 # python manage.py migrate
+# python manage.py sqlmigrate news 0001 - смотрим sql запрос
 
 # pip install djangorestframework - Rest API
+
+# pip install Pillow - для работы с изображениями во время миграций
+
