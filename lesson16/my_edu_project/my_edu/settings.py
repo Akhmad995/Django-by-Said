@@ -38,6 +38,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'rest_framework',
+    'rest_framework.authtoken',
+    'djoser',
     'posts',
     'users',
 ]
@@ -135,6 +137,9 @@ REST_FRAMEWORK = {
         # 'rest_framework.permissions.IsAdminUser',
         'posts.permissons.IsAdminOrReadOnly',
     ],
+    'DEFAULT_AUTHENTICATION_CLASSES': [
+        'rest_framework.authentication.TokenAuthentication'
+    ]
     # Установка пагинации на уровне проекта
     # 'DEFAULT_PAGINATION_CLASS' : 'rest_framework.pagination.PageNumberPagination',
     #'PAGE_SIZE' : 3,

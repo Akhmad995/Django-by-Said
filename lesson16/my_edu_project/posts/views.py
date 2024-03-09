@@ -5,7 +5,7 @@ from rest_framework.pagination import LimitOffsetPagination
 from .models import Post
 from .serializers import PostSerializer
 from .pagination import PostPagination
-from .permissions import isAdminOrReadOnly
+from .permissions import isAdminOrReadOnly, iAuthorOrReadOnly
 
 
 class PostViewSet(ModelViewSet):
@@ -16,4 +16,9 @@ class PostViewSet(ModelViewSet):
     permission_classes = (isAdminOrReadOnly,)
     # отключение пашинайии для отдельного вьюсета
     # pagination_class = None
+
+    def get_permissions(self):
+        if self.action == 'create':
+            return (iAuthorOrReadOnly(),)
+        return super().get_permissions()
     
