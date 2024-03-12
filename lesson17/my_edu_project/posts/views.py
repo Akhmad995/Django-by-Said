@@ -1,6 +1,6 @@
 from rest_framework import generics
-from django.contrib.auth.models import get_user_model
-from django_filters.rest_framework
+from django.contrib.auth import get_user_model
+from django_filters.rest_framework import DjangoFilterBackend
 
 from .models import Post
 from .serializers import PostSerializer
@@ -10,7 +10,8 @@ User = get_user_model()
 class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    filter_backends = 
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['title', 'author']
 
     # def get_queryset(self):
     #     # user = self.request.user
