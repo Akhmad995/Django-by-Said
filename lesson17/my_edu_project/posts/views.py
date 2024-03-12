@@ -1,24 +1,20 @@
-from rest_framework.viewsets import ModelViewSet
-from rest_framework.pagination import LimitOffsetPagination
-# from rest_framework.permissions import IsAuthenticated
+from rest_framework import generics
+from django.contrib.auth.models import get_user_model
+from django_filters.rest_framework
 
 from .models import Post
 from .serializers import PostSerializer
-from .pagination import PostPagination
-from .permissions import isAdminOrReadOnly, iAuthorOrReadOnly
 
+User = get_user_model()
 
-class PostViewSet(ModelViewSet):
+class PostList(generics.ListCreateAPIView):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
-    pagination_class = LimitOffsetPagination
-    # permission_classes = (IsAutenticated,)
-    permission_classes = (isAdminOrReadOnly,)
-    # отключение пашинайии для отдельного вьюсета
-    # pagination_class = None
+    filter_backends = 
 
-    def get_permissions(self):
-        if self.action == 'create':
-            return (iAuthorOrReadOnly(),)
-        return super().get_permissions()
-    
+    # def get_queryset(self):
+    #     # user = self.request.user
+    #     # user_id = self.kwargs.get('id')
+    #     user_id = self.request.query_params.get('id')
+    #     user = User.objects.get(pk=user_id)
+    #     return Post.objects.filter(author=user)

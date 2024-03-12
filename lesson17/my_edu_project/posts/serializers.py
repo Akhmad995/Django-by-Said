@@ -5,7 +5,7 @@ from .models import Post
 
 
 class PostSerializer(serializers.ModelSerializer):
-    author = serializers.StringRelatedField(read_only=True)
+    author = serializers.HiddenField(default=serializers.CurrentUserDefault()) # Скрываем поле и указываем значение по умолчанию
 
     class Meta:
         model = Post

@@ -46,3 +46,5 @@
 # pip install Pillow - для работы с изображениями во время миграций
 
 # pip install djoser - библиотека для утентификации и тд
+
+# pip install django-filter
