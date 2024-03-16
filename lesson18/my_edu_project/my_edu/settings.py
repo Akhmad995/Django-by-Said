@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'posts',
     'users',
     'django_filters',
+    'news',
 ]
 
 MIDDLEWARE = [
@@ -136,4 +137,5 @@ REST_FRAMEWORK = {
     # 'DEFAULT_FILTER_BACKENDS': [
     #     'django_filters.rest_framework.DjangoFilterBackend'
     # ]
+    'DEFAULT_PERMISSONS_CLASSES': ['rest_framework.rermissions.IsAuthenticatedOrReadOnly'],
 }

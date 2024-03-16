@@ -1,18 +1,43 @@
+from rest_framework import viewsets
+from rest_framework.decorators import action
+from rest_framework.response import Response
 from rest_framework import generics
-from django.contrib.auth import get_user_model
 
-from rest_framework.filters import OrderingFilter
-
-from .models import Post
-from .serializers import PostSerializer
-
-User = get_user_model()
+from .models import Post, Category
+from .serializers import PostSerializer, CategorySerializer, PostListSerializer
+from .permissions import iAuthorOrReadOnly
 
 
-class PostList(generics.ListCreateAPIView):
+class PostViewSet(viewsets.ModelViewSet):
     queryset = Post.objects.all()
     serializer_class = PostSerializer
 
-    filter_backends = [OrderingFilter]
-    ordering_fields = ['title', 'text']
-    ordering = ['-text']
+    # def get_queryset(self):
+    #     return super().get_queryset()
+
+    def perform_create(self, serializer):
+        serializer.save(author = self.request.user)
+
+    def get_serializer_class(self):
+        if self.action == 'list':
+            return PostListSerializer
+        return PostListSerializer
+
+    def get_permissions(self):
+        return super().get_permissions()
+
+    @action(detail=False, methods=['get'])
+    def my_post(self, request) -> Response:
+        posts = Post.objects.filter(author=request.user)
+        serializer = PostListSerializer(posts, many=True)
+        return Response(serializer.data)
+
+
+class CatetegoryList(generics.ListCreateAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
+
+
+class CatetegoryDetail(generics.RetrieveUpdateDestroyAPIView):
+    queryset = Category.objects.all()
+    serializer_class = CategorySerializer
